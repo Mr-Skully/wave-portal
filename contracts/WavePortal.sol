@@ -5,6 +5,7 @@ pragma solidity ^0.8.4;
 import "hardhat/console.sol";
 
 contract WavePortal {
+    
     uint totalWaves;
 
     event NewWave(address indexed from, uint timestamp, string message);
