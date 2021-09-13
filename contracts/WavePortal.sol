@@ -26,10 +26,10 @@ contract WavePortal {
     }
 
     function wave(string memory _message) public {
-        require(lastWavedAt[msg.sender] + 15 minutes < block.timestamp, "Cooldown (15min) in effect.");
+        require(lastWavedAt[msg.sender] + 30 seconds < block.timestamp, "Cooldown (15min) in effect.");
 
         lastWavedAt[msg.sender] = block.timestamp;
-        
+
         totalWaves += 1;
         console.log("%s just waved, and recommended: %s", msg.sender, _message);
         waves.push(Wave(msg.sender, block.timestamp, _message));
