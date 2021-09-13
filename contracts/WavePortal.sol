@@ -11,6 +11,8 @@ contract WavePortal {
 
     event NewWave(address indexed from, uint timestamp, string message);
 
+    mapping(address => uint) public lastWavedAt;
+
     struct Wave {
         address waver;
         uint timestamp;
@@ -24,6 +26,10 @@ contract WavePortal {
     }
 
     function wave(string memory _message) public {
+        require(lastWavedAt[msg.sender] + 15 minutes < block.timestamp, "Cooldown (15min) in effect.");
+
+        lastWavedAt[msg.sender] = block.timestamp;
+        
         totalWaves += 1;
         console.log("%s just waved, and recommended: %s", msg.sender, _message);
         waves.push(Wave(msg.sender, block.timestamp, _message));
